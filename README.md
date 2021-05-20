@@ -139,6 +139,42 @@ make -C ./work -j<njobs>
 make -j1 # The build MUST be sequential
 ```
 
+## Build RPM on NethServer 7
+
+Install build dependency
+```bash
+yum install -y devtoolset-9 devtoolset-9-runtime devtoolset-9-binutils* devtoolset-9-elfutils* devtoolset-9-gcc* devtoolset-9-make devtoolset-9-toolchain pystache libxml2-devel xerces-c-devel xsd soci-sqlite3-devel soci-postgresql-devel soci-odbc-devel soci-mysql-devel speex-devel mbedtls-devel libsrtp15-devel alsa-lib-devel openssl-devel bison nasm intltool doxygen rpm-build cmake3 postgresql-devel python-six python-devel libtool jansson-devel libnghttp2-devel net-snmp-devel protobuf-devel
+ln -sf /usr/bin/cmake3 /usr/bin/cmake
+```
+
+Switch to devtoolset 9
+```bash
+scl enable devtoolset-9 bash
+```
+
+Remove packages if installed on system
+```bash
+rpm -e --nodeps bc-flexisip bc-soci bc-belr bc-liblinphone bc-hiredis bc-ortp bc-mediastreamer bc-sofia-sip bc-bctoolbox bc-belle-sip
+```
+
+clone repo
+```bash
+git clone git@github.com:nethesis/flexisip.git
+cd flexisip
+git checkout pn-tok
+git submodule sync && git submodule update --init --recursive
+```
+
+Launch build
+``bash
+rm -fr WORK; ./prepare.py flexisip-rpm -DENABLE_CONFERENCE=ON -DENABLE_JWE_AUTH_PLUGIN=ON -DENABLE_EXTERNAL_AUTH_PLUGIN=ON -DENABLE_PRESENCE=ON -DENABLE_PROTOBUF=ON -DENABLE_SNMP=ON -DENABLE_SOCI=ON -DENABLE_TRANSCODER=ON; make -j1
+```
+
+Build fails beccause bc-sofia-sip-1.13.44bc.tar.gz is missing from WORK/flexisip-rpm/rpmbuild/SOURCES/, launch this command from another shell suddenly after build is started
+```bash
+cp ./submodules/externals/sofia-sip/bc-sofia-sip-1.13.44bc.tar.gz ./WORK/flexisip-rpm/rpmbuild/SOURCES/
+```
+
 ## Docker
 
 A docker image can be build from sources with command:
