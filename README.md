@@ -165,14 +165,14 @@ git checkout pn-tok
 git submodule sync && git submodule update --init --recursive
 ```
 
+Build fails if bc-sofia-sip-1.13.44bc.tar.gz is missing from WORK/flexisip-rpm/rpmbuild/SOURCES/
+```bash
+cp ./submodules/externals/sofia-sip/bc-sofia-sip-1.13.44bc.tar.gz ./WORK/flexisip-rpm/rpmbuild/SOURCES/
+```
+
 Launch build
 ``bash
 rm -fr WORK; ./prepare.py flexisip-rpm -DENABLE_CONFERENCE=ON -DENABLE_JWE_AUTH_PLUGIN=ON -DENABLE_EXTERNAL_AUTH_PLUGIN=ON -DENABLE_PRESENCE=ON -DENABLE_PROTOBUF=ON -DENABLE_SNMP=ON -DENABLE_SOCI=ON -DENABLE_TRANSCODER=ON; make -j1
-```
-
-Build fails beccause bc-sofia-sip-1.13.44bc.tar.gz is missing from WORK/flexisip-rpm/rpmbuild/SOURCES/, launch this command from another shell suddenly after build is started
-```bash
-cp ./submodules/externals/sofia-sip/bc-sofia-sip-1.13.44bc.tar.gz ./WORK/flexisip-rpm/rpmbuild/SOURCES/
 ```
 
 ## Docker
