@@ -143,7 +143,7 @@ make -j1 # The build MUST be sequential
 
 Install build dependency
 ```bash
-yum install -y devtoolset-9 devtoolset-9-runtime devtoolset-9-binutils* devtoolset-9-elfutils* devtoolset-9-gcc* devtoolset-9-make devtoolset-9-toolchain pystache libxml2-devel xerces-c-devel xsd soci-sqlite3-devel soci-postgresql-devel soci-odbc-devel soci-mysql-devel speex-devel mbedtls-devel libsrtp15-devel alsa-lib-devel openssl-devel bison nasm intltool doxygen rpm-build cmake3 postgresql-devel python-six python-devel libtool jansson-devel libnghttp2-devel net-snmp-devel protobuf-devel
+yum install -y devtoolset-9 devtoolset-9-runtime devtoolset-9-binutils* devtoolset-9-elfutils* devtoolset-9-gcc* devtoolset-9-make devtoolset-9-toolchain pystache libxml2-devel xerces-c-devel xsd soci-sqlite3-devel soci-postgresql-devel soci-odbc-devel soci-mysql-devel speex-devel mbedtls-devel libsrtp15-devel alsa-lib-devel openssl-devel bison nasm intltool doxygen rpm-build cmake3 postgresql-devel python-six python-devel libtool jansson-devel libnghttp2-devel net-snmp-devel protobuf-devel at
 ln -sf /usr/bin/cmake3 /usr/bin/cmake
 ```
 
