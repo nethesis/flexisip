@@ -175,7 +175,6 @@ Set belle-sip tag to change its version from 4.3.2 to 4.3.3
 ```bash
 cd linphone-sdk/belle-sip/
 git tag -d 4.3.2
-git tag -d 4.3.3
 git tag 4.3.3 -m 4.3.3 5f98e97f98e32baccdf6f033308a0329fdc36e55
 cd -
 ```
