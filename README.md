@@ -180,13 +180,6 @@ git tag 4.3.3 -m 4.3.3 5f98e97f98e32baccdf6f033308a0329fdc36e55
 cd -
 ```
 
-
-Build fails if bc-sofia-sip-1.13.44bc.tar.gz is missing from WORK/flexisip-rpm/rpmbuild/SOURCES/; let it fail first time, than copy the file where it is expected
-```bash
-rm -fr WORK; ./prepare.py flexisip-rpm -DENABLE_CONFERENCE=ON -DENABLE_JWE_AUTH_PLUGIN=ON -DENABLE_EXTERNAL_AUTH_PLUGIN=ON -DENABLE_PRESENCE=ON -DENABLE_PROTOBUF=ON -DENABLE_SNMP=ON -DENABLE_SOCI=ON -DENABLE_TRANSCODER=ON; make -j1
-cp ./submodules/externals/sofia-sip/bc-sofia-sip-1.13.44bc.tar.gz ./WORK/flexisip-rpm/rpmbuild/SOURCES/
-```
-
 Launch build
 ``bash
 rm -fr WORK; ./prepare.py flexisip-rpm -DENABLE_CONFERENCE=ON -DENABLE_JWE_AUTH_PLUGIN=ON -DENABLE_EXTERNAL_AUTH_PLUGIN=ON -DENABLE_PRESENCE=ON -DENABLE_PROTOBUF=ON -DENABLE_SNMP=ON -DENABLE_SOCI=ON -DENABLE_TRANSCODER=ON; make -j1
