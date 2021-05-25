@@ -484,19 +484,19 @@ void PushNotification::parseLegacyPushParams(const shared_ptr<MsgSip> &ms, const
 	try {
 		pinfo.mDeviceToken = UriUtils::getParamValue(params, "pn-tok");
 	} catch (const out_of_range &) {
-		throw runtime_error("no pn-tok");
+		LOGD("no pn-tok. Continue anyway.");
 	}
 
 	try {
 		pinfo.mAppId = UriUtils::getParamValue(params, "app-id");
 	} catch (const out_of_range &) {
-		throw runtime_error("no app-id");
+		LOGD("no app-id. Continue anyway.");
 	}
 
 	try {
 		pinfo.mType = UriUtils::getParamValue(params, "pn-type");
 	} catch (const out_of_range &) {
-		throw runtime_error("no pn-type");
+		LOGD("no pn-type. Continue anyway.");
 	}
 
 	if (pinfo.mType == "apple") {
@@ -570,9 +570,8 @@ void PushNotification::makePushNotification(const shared_ptr<MsgSip> &ms,
 				SLOGE << "Error while parsing lecacy push notification parameters from request-uri: " << e.what();
 				return;
 			}
-		}else {
-			LOGD("Request has no push notification parameters. Destination client probably didn't submitted them in REGISTER.");
-			return;
+		} else {
+			LOGD("Request has no push notification parameters. Destination client probably didn't submitted them in REGISTER. Continue anyway");
 		}
 
 		// Extract the unique id if possible.
