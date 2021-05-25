@@ -165,8 +165,25 @@ git checkout pn-tok
 git submodule sync && git submodule update --init --recursive
 ```
 
-Build fails if bc-sofia-sip-1.13.44bc.tar.gz is missing from WORK/flexisip-rpm/rpmbuild/SOURCES/
+Set git tag 2.04 to current branch to set flexisip version
 ```bash
+git tag -d 2.0.4
+git tag 2.0.4
+```
+
+Set belle-sip tag to change its version from 4.3.2 to 4.3.3
+```bash
+cd linphone-sdk/belle-sip/
+git tag -d 4.3.2
+git tag -d 4.3.3
+git tag 4.3.3 -m 4.3.3 5f98e97f98e32baccdf6f033308a0329fdc36e55
+cd -
+```
+
+
+Build fails if bc-sofia-sip-1.13.44bc.tar.gz is missing from WORK/flexisip-rpm/rpmbuild/SOURCES/; let it fail first time, than copy the file where it is expected
+```bash
+rm -fr WORK; ./prepare.py flexisip-rpm -DENABLE_CONFERENCE=ON -DENABLE_JWE_AUTH_PLUGIN=ON -DENABLE_EXTERNAL_AUTH_PLUGIN=ON -DENABLE_PRESENCE=ON -DENABLE_PROTOBUF=ON -DENABLE_SNMP=ON -DENABLE_SOCI=ON -DENABLE_TRANSCODER=ON; make -j1
 cp ./submodules/externals/sofia-sip/bc-sofia-sip-1.13.44bc.tar.gz ./WORK/flexisip-rpm/rpmbuild/SOURCES/
 ```
 
