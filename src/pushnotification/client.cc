@@ -235,7 +235,7 @@ int TlsTransport::sendPush(Request &req, bool hurryUp, const OnSuccessCb &onSucc
 	char r[1024];
 	int p = mConn->read(r, sizeof(r)-1);
 	if (p <= 0) {
-		SLOGE << "PushNotificationTransportTls PNR " << &req << "error reading mandatory response: " << p;
+		SLOGD << "PushNotificationTransportTls PNR " << &req << "error reading mandatory response: " << p;
 		mConn->resetConnection();
 		return -2;
 	}
