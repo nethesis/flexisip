@@ -161,7 +161,7 @@ clone repo
 ```bash
 git clone git@github.com:nethesis/flexisip.git
 cd flexisip
-git checkout pn-tok
+git checkout 2.0.4_base
 git submodule sync && git submodule update --init --recursive
 ```
 
@@ -182,6 +182,27 @@ cd -
 Launch build
 ``bash
 rm -fr WORK; ./prepare.py flexisip-rpm -DENABLE_CONFERENCE=ON -DENABLE_JWE_AUTH_PLUGIN=ON -DENABLE_EXTERNAL_AUTH_PLUGIN=ON -DENABLE_PRESENCE=ON -DENABLE_PROTOBUF=ON -DENABLE_SNMP=ON -DENABLE_SOCI=ON -DENABLE_TRANSCODER=ON; make -j1
+```
+
+recompile from SRPMS changing dist number to "2" (change value in sed if you whant a different release number)
+```bash
+mkdir rpms
+cd rpms
+cp ../WORK/flexisip-rpm/rpmbuild/SRPMS/*.src.rpm ./
+for SRPM in $(ls *.src.rpm); do rpm2cpio $SRPM | cpio -idmv; done
+sed -i 's/Release:.*%{?dist}/Release:        2%{?dist}/g' *.spec
+mkdir -p /root/rpmbuild/SOURCES/
+cp *.tar.gz /root/rpmbuild/SOURCES/
+mkdir -p /root/rpmbuild/SRPMS/
+rpmbuild -ba bctoolbox.spec
+rpmbuild -ba belle-sip.spec
+rpmbuild -ba belr.spec
+rpmbuild -ba hiredis.spec
+rpmbuild -ba jose.spec
+rpmbuild -ba liblinphone.spec
+rpmbuild -ba mediastreamer2.spec
+rpmbuild -ba ortp.spec
+rpmbuild -ba soci.spec
 ```
 
 ## Docker
